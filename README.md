@@ -2,7 +2,7 @@
 Spotlight is an Android library used to onboard users by showcasing specific features in the app.
 
 [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
-<img src="https://img.shields.io/badge/license-Apache 2.0-green.svg?style=flat">
+<img src="https://github.com/The-LoneWolf/Spotlight/raw/master/img/rtl-screen.jpg">
 [![API](https://img.shields.io/badge/API-11%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=11)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Spotlight-green.svg?style=flat)](http://android-arsenal.com/details/1/3730)
 
@@ -30,57 +30,29 @@ new SpotlightView.Builder(this)
         .dismissOnBackPress(true)
         .enableDismissAfterShown(true)
         .usageId(usageId) //UNIQUE ID
+        .setRtl(true) // enable RTL
         .show();
 ```
+
 
 ## Download
 ### Gradle
 
-1. Define the jitpack remote Maven repository inside the repositories block of your root `build.gradle` file
-
-    ```javascript
-    allprojects {
-        repositories {
-            ...
-            maven { url "https://jitpack.io" }
-        }
-    }
-    ```
+1. Download zip file of repo and extract it. Import Spotlight-library folder as module to your project.
 
 2. Add the Spotlight dependency
 
     ```javascript
     dependencies {
         ...
-        compile 'com.github.wooplr:Spotlight:1.2.3'
+    compile project(':Spotlight-library')
     }
     ```
 
-### Maven
-
-1. Define the jitpack remote Maven repository in your `pom.xml` at the end of repositories
-
-    ```xml
-    <repositories>
-        ...
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-    ```
-
-2. Add the Spotlight dependency
-
-    ```xml
-    <dependency>
-        <groupId>com.github.wooplr</groupId>
-        <artifactId>Spotlight</artifactId>
-        <version>1.2.3</version>
-    </dependency>
-    ```
-
 # Builder Methods
+
+### setRtl(true)
+enable RTL
 
 ### maskColor(int)
 Overlay Color
