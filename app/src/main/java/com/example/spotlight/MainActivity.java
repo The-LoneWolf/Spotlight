@@ -2,6 +2,7 @@ package com.example.spotlight;
 
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wooplr.spotlight.SpotlightConfig;
 import com.wooplr.spotlight.SpotlightView;
 import com.wooplr.spotlight.prefs.PreferencesManager;
 import com.wooplr.spotlight.utils.SpotlightSequence;
@@ -26,7 +28,6 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
 
 
 //    static {
@@ -53,6 +54,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView changePosAndPlay;
     @BindView(R.id.startSequence)
     TextView startSequence;
+    @BindView(R.id.rtlView)
+    TextView rtlView;
+    @BindView(R.id.rtlSequence)
+    TextView rtlSequence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switchAnimation.setOnClickListener(this);
         reset.setOnClickListener(this);
         resetAndPlay.setOnClickListener(this);
+        rtlView.setOnClickListener(this);
+        rtlSequence.setOnClickListener(this);
         changePosAndPlay.setOnClickListener(this);
         startSequence.setOnClickListener(this);
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
@@ -128,16 +135,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        SpotlightSequence.getInstance(MainActivity.this,null)
+                        SpotlightSequence.getInstance(MainActivity.this, null)
                                 .addSpotlight(switchAnimation, "Switch Animation", "Click to swtich the animation", INTRO_SWITCH)
                                 .addSpotlight(reset, "Reset ", "Click here to reset preferences", INTRO_RESET)
                                 .addSpotlight(resetAndPlay, "Play Again", "Click here to play again", INTRO_REPEAT)
                                 .addSpotlight(changePosAndPlay, "Change Position", "Click here to change position and replay", INTRO_CHANGE_POSITION)
                                 .addSpotlight(startSequence, "Start sequence", "Well.. you just clicked here", INTRO_SEQUENCE)
-                                .addSpotlight(fab,"Love", "Like the picture?\n" + "Let others know.", INTRO_CARD)
+                                .addSpotlight(fab, "Love", "Like the picture?\n" + "Let others know.", INTRO_CARD)
                                 .startSequence();
                     }
-                },400);
+                }, 400);
+                break;
+            case R.id.rtlSequence:
+                mPreferencesManager.resetAll();
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        SpotlightSequence.getInstance(MainActivity.this, getSpotLightConfig())
+                                .addSpotlight(switchAnimation, "انیمیشن اول", "نوشته های نمایشی انیمیشن اول", INTRO_SWITCH)
+                                .addSpotlight(reset, "انیمیشن دوم", "نوشته های نمایشی انیمیشن دوم", INTRO_RESET)
+                                .startSequence();
+                    }
+                }, 400);
+                break;
+            case R.id.rtlView:
+                mPreferencesManager.resetAll();
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showRtlIntro(fab, INTRO_CARD);
+                    }
+                }, 400);
                 break;
         }
     }
@@ -166,14 +194,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .show();
     }
 
+    private void showRtlIntro(View view, String usageId) {
+        spotLight = new SpotlightView.Builder(this)
+                .introAnimationDuration(400)
+                .enableRevealAnimation(isRevealEnabled)
+                .performClick(true)
+                .fadeinTextDuration(400)
+                .setTypeface(FontUtil.get(this, "vazir"))
+                .headingTvColor(Color.parseColor("#eb273f"))
+                .headingTvSize(32)
+                .headingTvText("سلام")
+                .subHeadingTvColor(Color.parseColor("#ffffff"))
+                .subHeadingTvSize(16)
+                .subHeadingTvText("سلام دنیا این متن تست هست!")
+                .maskColor(Color.parseColor("#dc000000"))
+                .target(view)
+                .setRtl(true)
+                .lineAnimDuration(400)
+                .lineAndArcColor(Color.parseColor("#eb273f"))
+                .dismissOnTouch(true)
+                .dismissOnBackPress(true)
+                .enableDismissAfterShown(true)
+                .usageId(usageId) //UNIQUE ID
+                .show();
+    }
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        if(spotLight.isShown()){
+        if (spotLight.isShown()) {
             spotLight.removeSpotlightView(false);//Remove current spotlight view from parent
             resetAndPlay.performClick();//Show it again in new orientation if required.
         }
+    }
+
+    public SpotlightConfig getSpotLightConfig() {
+        SpotlightConfig config = new SpotlightConfig();
+        config.setTypeface(FontUtil.get(this, "vazir"));
+        config.setRtl(true);
+        return config;
     }
 }
 

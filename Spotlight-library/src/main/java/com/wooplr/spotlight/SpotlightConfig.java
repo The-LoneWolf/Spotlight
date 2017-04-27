@@ -30,6 +30,7 @@ public class SpotlightConfig {
     private int lineStroke;
     private int lineAndArcColor;
     private boolean showTargetArc;
+    private boolean isRtl;
     private Typeface typeface;
 
     public SpotlightConfig() {
@@ -53,6 +54,7 @@ public class SpotlightConfig {
         this.lineStroke = Utils.dpToPx(4);
         this.lineAndArcColor = Color.parseColor("#eb273f");
         this.showTargetArc = true;
+        this.isRtl = false;
     }
 
     public int getMaskColor() {
@@ -122,6 +124,14 @@ public class SpotlightConfig {
     public void setHeadingTvSize(int dimenUnit, int size) {
         this.headingTvSizeDimenUnit = dimenUnit;
         this.headingTvSize = size;
+    }
+
+    public boolean getRtl() {
+        return isRtl;
+    }
+
+    public void setRtl(boolean RTL) {
+        this.isRtl = RTL;
     }
 
     public int getHeadingTvColor() {
