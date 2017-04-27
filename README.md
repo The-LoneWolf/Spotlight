@@ -2,12 +2,15 @@
 Spotlight is an Android library used to onboard users by showcasing specific features in the app.
 
 [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
-<img src="https://github.com/The-LoneWolf/Spotlight/raw/master/img/rtl-screen.jpg">
+<img src="https://img.shields.io/badge/license-Apache 2.0-green.svg?style=flat">
 [![API](https://img.shields.io/badge/API-11%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=11)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Spotlight-green.svg?style=flat)](http://android-arsenal.com/details/1/3730)
 
 #Screen
 <img src="https://raw.githubusercontent.com/wooplr/Spotlight/master/art/intro.gif?token=AA5ZAHdvAspW6Zj8YyyKamkV7jWXFtMHks5XaQovwA%3D%3D"/>
+
+RTL-ized
+<img src="https://github.com/The-LoneWolf/Spotlight/raw/master/img/rtl-screen.jpg" width="360px" height="640px">
 
 #Usage
 ```java
