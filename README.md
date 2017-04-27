@@ -1,4 +1,4 @@
-# Spotlight
+# Spotlight RTL-ized
 Spotlight is an Android library used to onboard users by showcasing specific features in the app.
 
 [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
